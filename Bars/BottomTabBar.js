@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Animated
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from './MaterialIcons';
 import Button from 'react-native-scrollable-tab-view/Button';
 
 const BottomTabBar = React.createClass({

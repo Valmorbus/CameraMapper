@@ -15,15 +15,19 @@ import { styles } from './styles/index';
 import CameraView from './Views/camera';
 import Mapper from './Views/map';
 
-var ScrollableTabView = require('react-native-scrollable-tab-view');
-var BottomTabBar = require('./Bars/BottomTabBar');
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import BottomTabBar from './Bars/BottomTabBar';
 
 export default class CameraMapper extends Component {
   render() {
     return (
-      <ScrollableTabView >
-        <CameraView tabLabel="Camera"/>
-        <Mapper tabLabel="Maps"/>
+      <ScrollableTabView
+        tabBarBackgroundColor='black'
+          tabBarPosition='bottom'
+          prerenderingSiblingsNumber={3}
+         renderTabBar={() => <BottomTabBar />}>
+        <CameraView tabLabel="camera" tab='vip'/>
+        <Mapper tabLabel="map" tab='photos'/>
       </ScrollableTabView>
     );
 
