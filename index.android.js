@@ -13,11 +13,26 @@ import {
 } from 'react-native';
 import { styles } from './styles/index';
 import Camera from 'react-native-camera';
+import MapView from 'react-native-maps';
 
 
 export default class CameraMapper extends Component {
   render() {
     return (
+      <View style={styles.mapcontainer}>
+       <MapView
+         style={styles.map}
+         region={{
+           latitude: 37.78825,
+           longitude: -122.4324,
+           latitudeDelta: 0.015,
+           longitudeDelta: 0.0121,
+         }}
+       >
+       </MapView>
+      </View>
+    );
+  /*  return (
         <View style={styles.container}>
         <Camera
           ref={(cam) => {
@@ -29,7 +44,7 @@ export default class CameraMapper extends Component {
         </Camera>
 
       </View>
-    );
+    );*/
   }
 
   takePicture() {
