@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { styles } from '../styles/index';
 import Camera from 'react-native-camera';
-
+import Icon from '../Bars/MaterialIcons';
 
 export default class CameraView extends Component {
   render() {
@@ -24,7 +24,12 @@ export default class CameraView extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+
+            <Icon
+              name="panorama-fish-eye"
+              size={90}
+              color='white'
+              onPress={this.takePicture.bind(this)}/>
         </Camera>
 
       </View>

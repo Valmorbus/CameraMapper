@@ -10,6 +10,7 @@ import {
   Text,
   View,
   TouchableHighlight,
+  StatusBar,
 } from 'react-native';
 import { styles } from './styles/index';
 import CameraView from './Views/camera';
@@ -21,14 +22,20 @@ import BottomTabBar from './Bars/BottomTabBar';
 export default class CameraMapper extends Component {
   render() {
     return (
-      <ScrollableTabView
-        tabBarBackgroundColor='black'
+      <View style={styles.container}>
+        <StatusBar
+         backgroundColor='black'
+         barStyle="light-content"
+        />
+        <ScrollableTabView
+          tabBarBackgroundColor='black'
           tabBarPosition='bottom'
           prerenderingSiblingsNumber={3}
-         renderTabBar={() => <BottomTabBar />}>
-        <CameraView tabLabel="camera" tab='vip'/>
-        <Mapper tabLabel="map" tab='photos'/>
-      </ScrollableTabView>
+          renderTabBar={() => <BottomTabBar />}>
+          <CameraView tabLabel="camera"/>
+          <Mapper tabLabel="map"/>
+        </ScrollableTabView>
+    </View>
     );
 
   }
