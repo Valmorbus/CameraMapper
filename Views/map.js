@@ -10,9 +10,11 @@ import {
   View,
   TouchableHighlight,
   AsyncStorage,
+  Image,
 } from 'react-native';
 import { styles } from '../styles/index';
 import MapView from 'react-native-maps';
+import Modal from 'react-native-simple-modal';
 
 
 export default class Mapper extends Component {
@@ -27,6 +29,8 @@ export default class Mapper extends Component {
         longitudeDelta: 0.0121,
       },
       imageArray:[],
+      modalVisible: false,
+      modalImage: '',
     };
   }
   componentWillMount() {
@@ -50,20 +54,50 @@ export default class Mapper extends Component {
       });
   }
 
+  showImageModal(image) {
+    this.setState({modalImage: image, modalVisible: true});
+  }
+
   renderMarkers() {
     let markerArray = [];
     let imageArray = this.state.imageArray;
     for (let i in imageArray) {
-      console.log(imageArray[i].image.path);
       markerArray.push(
         <MapView.Marker
           key={i}
           image={{ImageSource: imageArray[i].image.path}}
           coordinate={{latitude: imageArray[i].latitude, longitude: imageArray[i].longitude}}
-          />
+          onPress={ () => this.showImageModal(imageArray[i].image.path)}
+          >
+          <Image  source={{uri: imageArray[i].image.path, isStatic:true}} style={{width: 50, height: 50}}/>
+          <MapView.Callout tooltip={true} />
+      </MapView.Marker>
       );
     }
     return markerArray;
+  }
+
+  renderModal() {
+    return (
+      <Modal
+        style={styles.modal}
+        animationType={'slide'}
+         overlayBackground={'rgba(0, 0, 0, 0.75)'}
+        closeOnTouchOutside={true}
+        open={this.state.modalVisible}
+        modalDidClose={() => {this.setState({modalVisible: false});}}
+        containerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        >
+         <Image
+           source={{uri: this.state.modalImage, isStatic:true}}
+           style={{width: 250, height: 250}}
+           resizeMode={'cover'}
+           />
+       </Modal>
+    );
   }
 
   render() {
@@ -75,10 +109,11 @@ export default class Mapper extends Component {
          region={this.state.region}
          showsUserLocation={true}
          followsUserLocation={true}
-
+         showsCompass={true}
        >
        { this.renderMarkers() }
        </MapView>
+       { this.renderModal() }
       </View>
     );
   }

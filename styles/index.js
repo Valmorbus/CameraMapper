@@ -32,12 +32,18 @@ export const styles = StyleSheet.create({
   },
   mapcontainer: {
     ...StyleSheet.absoluteFillObject,
-    height: 400,
-    width: 400,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  modal: {
+    borderRadius: 2,
+    margin: 20,
+    padding: 10,
+    backgroundColor: '#F5F5F5'
   },
 });
