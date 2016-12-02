@@ -28,6 +28,7 @@
             "always"
         ],
         "no-unused-vars": [1, { "vars": "all", "args": "after-used" }],
+        "no-undef": 1,
         "no-console": 1
     }
 }

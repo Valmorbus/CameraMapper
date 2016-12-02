@@ -20,6 +20,29 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import BottomTabBar from './Bars/BottomTabBar';
 
 export default class CameraMapper extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      region: {
+        latitude: 59.334591,
+        longitude: 18.063240,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121,
+      }
+    };
+
+  }
+
+  componentWillMount() {
+    this.getGeoLocation();
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,12 +55,30 @@ export default class CameraMapper extends Component {
           tabBarPosition='bottom'
           prerenderingSiblingsNumber={3}
           renderTabBar={() => <BottomTabBar />}>
-          <CameraView tabLabel="camera"/>
-          <Mapper tabLabel="map"/>
+          <CameraView tabLabel="camera" region={ this.state.region }/>
+          <Mapper tabLabel="map" region={ this.state.region }/>
         </ScrollableTabView>
     </View>
     );
 
+  }
+
+  getGeoLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({region:{
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        }});
+      },
+      (error) => console.log(JSON.stringify(error)),
+    {enableHighAccuracy: false, timeout: 10000, maximumAge: 1000}
+    );
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      let lastPosition = JSON.stringify(position.coords);
+    });
   }
 
 }
