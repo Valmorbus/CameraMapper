@@ -39,6 +39,12 @@ export default class Mapper extends Component {
     this.getImageLocation();
   }
 
+  componentDidMount() {
+    this.interval = setInterval(() =>{
+      this.getImageLocation();
+    }, 10000);
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({region: nextProps.region});
   }
@@ -101,10 +107,13 @@ export default class Mapper extends Component {
         }}
         >
          <Image
-           source={{uri: this.state.modalImage, isStatic:true}}
-           style={{width: this.state.imageWidth/2, height: this.state.imageHeight/2}}
-           resizeMode={'cover'}
+          source={{uri: this.state.modalImage, isStatic:true}}
+          style={{width: this.state.imageWidth/2, height: this.state.imageHeight/2}}
+          resizeMode={'cover'}
            />
+          <TouchableHighlight onPress={()=>{}}>
+            <Text> Press me FB</Text>
+          </TouchableHighlight>
        </Modal>
     );
   }

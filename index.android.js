@@ -11,6 +11,7 @@ import {
   View,
   TouchableHighlight,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 import { styles } from './styles/index';
 import CameraView from './Views/camera';
@@ -18,6 +19,7 @@ import Mapper from './Views/map';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import BottomTabBar from './Bars/BottomTabBar';
+import Orientation from 'react-native-orientation';
 
 export default class CameraMapper extends Component {
 
@@ -30,13 +32,35 @@ export default class CameraMapper extends Component {
         longitude: 18.063240,
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121,
-      }
+      },
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
     };
 
   }
 
   componentWillMount() {
     this.getGeoLocation();
+  }
+  componentDidMount() {
+    Orientation.unlockAllOrientations();
+    Orientation.addOrientationListener(this._orientationDidChange.bind(this));
+  }
+
+  _orientationDidChange(orientation) {
+    if (orientation === 'LANDSCAPE') {
+      this.setState({
+        width: Dimensions.get('window').height,
+        height: Dimensions.get('window').width
+      });
+
+    } else {
+      this.setState({
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
+      });
+    }
+
   }
 
   componentWillUnmount() {
@@ -55,8 +79,17 @@ export default class CameraMapper extends Component {
           tabBarPosition='bottom'
           prerenderingSiblingsNumber={3}
           renderTabBar={() => <BottomTabBar />}>
-          <CameraView tabLabel="camera" region={ this.state.region }/>
-          <Mapper tabLabel="map" region={ this.state.region }/>
+          <CameraView
+            tabLabel="camera"
+            region={ this.state.region }
+            width={ this.state.width }
+            height={ this.state.height }
+            />
+          <Mapper tabLabel="map"
+          region={ this.state.region }
+          width={ this.state.width }
+          height={ this.state.height }
+          />
         </ScrollableTabView>
     </View>
     );

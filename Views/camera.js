@@ -26,39 +26,16 @@ export default class CameraView extends Component {
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height
     };
-    console.log(this.state.width);
+
   }
 
   componentWillMount() {
     this.getImageLocation();
-    Orientation.getOrientation((err,orientation)=> {
-      console.log('log',orientation);
-    });
-  }
-
-  componentDidMount() {
-    Orientation.unlockAllOrientations();
-    Orientation.addOrientationListener(this._orientationDidChange.bind(this));
-  }
-
-  _orientationDidChange(orientation) {
-    if (orientation === 'LANDSCAPE') {
-      this.setState({
-        width: Dimensions.get('window').height,
-        height: Dimensions.get('window').width
-      });
-
-    } else {
-      this.setState({
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height
-      });
-    }
-
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({region: nextProps.region});
+    this.setState({width: nextProps.width, height: nextProps.height});
   }
 
   render() {

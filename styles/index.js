@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
   },
   mapcontainer: {
     ...StyleSheet.absoluteFillObject,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
+    //height: Dimensions.get('window').height,
+    //width: Dimensions.get('window').width,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
