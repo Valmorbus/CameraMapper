@@ -33,21 +33,15 @@ export default class CameraView extends Component {
     this.getImageLocation();
     Orientation.getOrientation((err,orientation)=> {
       console.log('log',orientation);
-
-
     });
-
-
   }
 
   componentDidMount() {
-    console.log('mount');
     Orientation.unlockAllOrientations();
     Orientation.addOrientationListener(this._orientationDidChange.bind(this));
   }
 
   _orientationDidChange(orientation) {
-    console.log(orientation);
     if (orientation === 'LANDSCAPE') {
       this.setState({
         width: Dimensions.get('window').height,
@@ -74,7 +68,7 @@ export default class CameraView extends Component {
           ref={(cam) => {
             this.camera = cam;
           }}
-          style={ styles.preview }
+          style={[ styles.preview, {width: this.state.width, height: this.state.height}] }
           aspect={ Camera.constants.Aspect.fill }
           FlashMode={ Camera.constants.FlashMode.auto }
           >

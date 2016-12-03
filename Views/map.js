@@ -31,6 +31,8 @@ export default class Mapper extends Component {
       imageArray:[],
       modalVisible: false,
       modalImage: '',
+      imageWidth: 50,
+      imageHeight: 50,
     };
   }
   componentWillMount() {
@@ -54,8 +56,13 @@ export default class Mapper extends Component {
       });
   }
 
-  showImageModal(image) {
-    this.setState({modalImage: image, modalVisible: true});
+  showImageModal(image, width, height) {
+    this.setState({
+      modalImage: image,
+      modalVisible: true,
+      imageWidth: width,
+      imageHeight: height
+    });
   }
 
   renderMarkers() {
@@ -67,11 +74,11 @@ export default class Mapper extends Component {
           key={i}
           image={{ImageSource: imageArray[i].image.path}}
           coordinate={{latitude: imageArray[i].latitude, longitude: imageArray[i].longitude}}
-          onPress={ () => this.showImageModal(imageArray[i].image.path)}
+          onPress={ () => this.showImageModal(imageArray[i].image.path, imageArray[i].width, imageArray[i].height )}
           >
             <Image
               source={{uri: imageArray[i].image.path, isStatic:true}}
-              style={{width: 50, height: 60, borderColor: 'white', borderWidth: 4, borderRadius: 2}}/>
+              style={{width: imageArray[i].width/10, height: imageArray[i].height/10, borderColor: 'white', borderWidth: 4, borderRadius: 2}}/>
           <MapView.Callout tooltip={true} />
       </MapView.Marker>
       );
@@ -95,7 +102,7 @@ export default class Mapper extends Component {
         >
          <Image
            source={{uri: this.state.modalImage, isStatic:true}}
-           style={{width: 250, height: 250}}
+           style={{width: this.state.imageWidth/2, height: this.state.imageHeight/2}}
            resizeMode={'cover'}
            />
        </Modal>
