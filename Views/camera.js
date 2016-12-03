@@ -10,10 +10,12 @@ import {
   View,
   TouchableHighlight,
   AsyncStorage,
+  Dimensions,
 } from 'react-native';
 import { styles } from '../styles/index';
 import Camera from 'react-native-camera';
 import Icon from '../Bars/MaterialIcons';
+import Orientation from 'react-native-orientation';
 
 export default class CameraView extends Component {
 
@@ -21,11 +23,44 @@ export default class CameraView extends Component {
     super(props);
     this.state = {
       imageArray: [],
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
     };
+    console.log(this.state.width);
   }
 
   componentWillMount() {
     this.getImageLocation();
+    Orientation.getOrientation((err,orientation)=> {
+      console.log('log',orientation);
+
+
+    });
+
+
+  }
+
+  componentDidMount() {
+    console.log('mount');
+    Orientation.unlockAllOrientations();
+    Orientation.addOrientationListener(this._orientationDidChange.bind(this));
+  }
+
+  _orientationDidChange(orientation) {
+    console.log(orientation);
+    if (orientation === 'LANDSCAPE') {
+      this.setState({
+        width: Dimensions.get('window').height,
+        height: Dimensions.get('window').width
+      });
+
+    } else {
+      this.setState({
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
+      });
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,6 +108,8 @@ export default class CameraView extends Component {
       image: image,
       latitude: this.props.region.latitude,
       longitude: this.props.region.longitude,
+      width: this.state.width,
+      height: this.state.height
     };
     arr.push(imageData);
     AsyncStorage.setItem('imageData', JSON.stringify(arr));
