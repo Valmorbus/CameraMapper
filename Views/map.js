@@ -69,7 +69,9 @@ export default class Mapper extends Component {
           coordinate={{latitude: imageArray[i].latitude, longitude: imageArray[i].longitude}}
           onPress={ () => this.showImageModal(imageArray[i].image.path)}
           >
-          <Image  source={{uri: imageArray[i].image.path, isStatic:true}} style={{width: 50, height: 50}}/>
+            <Image
+              source={{uri: imageArray[i].image.path, isStatic:true}}
+              style={{width: 50, height: 60, borderColor: 'white', borderWidth: 4, borderRadius: 2}}/>
           <MapView.Callout tooltip={true} />
       </MapView.Marker>
       );
@@ -82,7 +84,7 @@ export default class Mapper extends Component {
       <Modal
         style={styles.modal}
         animationType={'slide'}
-         overlayBackground={'rgba(0, 0, 0, 0.75)'}
+        overlayBackground={'rgba(0, 0, 0, 0.75)'}
         closeOnTouchOutside={true}
         open={this.state.modalVisible}
         modalDidClose={() => {this.setState({modalVisible: false});}}
