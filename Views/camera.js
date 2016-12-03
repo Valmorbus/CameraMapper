@@ -39,10 +39,32 @@ export default class CameraView extends Component {
     this.getImageLocation();
   }
 
+  componentDidMount() {
+    Orientation.unlockAllOrientations();
+    Orientation.addOrientationListener(this._orientationDidChange.bind(this));
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({region: nextProps.region});
-    this.setState({width: nextProps.width, height: nextProps.height});
+  //  this.setState({width: nextProps.width, height: nextProps.height});
   }
+
+  _orientationDidChange(orientation) {
+    if (orientation === 'LANDSCAPE') {
+      this.setState({
+        width: Dimensions.get('window').height,
+        height: Dimensions.get('window').width
+      });
+
+    } else {
+      this.setState({
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
+      });
+    }
+
+  }
+
 
   render() {
     return (
@@ -53,30 +75,32 @@ export default class CameraView extends Component {
           }}
           style={[ styles.preview, {width: this.state.width, height: this.state.height}] }
           aspect={ Camera.constants.Aspect.fill }
-          FlashMode={ this.state.flashMode }
+          flashMode={ this.state.flashMode }
           type={this.state.type}
+          defaultTouchToFocus
           >
+          <View style={styles.buttonRow}>
             <Icon
               style={styles.flashButton}
               name={this.state.flashIcon}
-              size={40}
+              size={30}
               color="white"
               onPress={this.switchFlash.bind(this)} />
             <Icon
-              style={styles.typeButton}
-              name={this.state.typeIcon}
-              size={40}
-              color="white"
-              onPress={this.switchType.bind(this)} />
-            <Icon
               style={ styles.capture }
               name="panorama-fish-eye"
-              size={90}
+              size={60}
               color='white'
               onPress={ this.takePicture.bind(this) }/>
+            <Icon
+              style={styles.typeButton}
+              name={this.state.typeIcon}
+              size={30}
+              color="white"
+              onPress={this.switchType.bind(this)} />
 
+            </View>
         </Camera>
-
       </View>
     );
   }
@@ -117,7 +141,7 @@ export default class CameraView extends Component {
 
   switchFlash() {
     let newFlashMode;
-    const { auto, on, off } = Camera.constants.FlashMode;
+    const { off, auto, on } = Camera.constants.FlashMode;
     if (this.state.flashMode === auto) {
       newFlashMode = on;
     } else if (this.state.flashMode === on) {
@@ -151,7 +175,8 @@ export default class CameraView extends Component {
       latitude: this.props.region.latitude,
       longitude: this.props.region.longitude,
       width: this.state.width,
-      height: this.state.height
+      height: this.state.height,
+      date: new Date()
     };
     arr.push(imageData);
     AsyncStorage.setItem('imageData', JSON.stringify(arr));

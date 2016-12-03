@@ -33,6 +33,13 @@ export const styles = StyleSheet.create({
   flashButton: {
     padding: 5,
   },
+  buttonRow: {
+    top: 0,
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   mapcontainer: {
     ...StyleSheet.absoluteFillObject,
     //height: Dimensions.get('window').height,

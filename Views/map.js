@@ -16,7 +16,6 @@ import { styles } from '../styles/index';
 import MapView from 'react-native-maps';
 import Modal from 'react-native-simple-modal';
 
-
 export default class Mapper extends Component {
 
   constructor(props) {
@@ -130,8 +129,8 @@ export default class Mapper extends Component {
          showsCompass={true}
        >
        { this.renderMarkers() }
+
        </MapView>
-       { this.renderModal() }
       </View>
     );
   }
