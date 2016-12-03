@@ -30,6 +30,9 @@ export const styles = StyleSheet.create({
     padding: 10,
     margin: 40
   },
+  flashButton: {
+    padding: 5,
+  },
   mapcontainer: {
     ...StyleSheet.absoluteFillObject,
     //height: Dimensions.get('window').height,
