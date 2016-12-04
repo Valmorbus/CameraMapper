@@ -41,7 +41,7 @@ export default class Mapper extends Component {
   componentDidMount() {
     this.interval = setInterval(() =>{
       this.getImageLocation();
-    }, 10000);
+    }, 60000);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -131,6 +131,7 @@ export default class Mapper extends Component {
        { this.renderMarkers() }
 
        </MapView>
+       { this.renderModal() }
       </View>
     );
   }

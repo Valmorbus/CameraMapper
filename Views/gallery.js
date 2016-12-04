@@ -24,7 +24,7 @@ export default class Gallery extends Component {
 
   componentWillMount() {
     this.getImageLocation();
-  //  this.renderGallery();
+    this.renderGallery();
   }
 
   renderGallery() {
@@ -62,11 +62,11 @@ export default class Gallery extends Component {
         backgroundColor={'black'}
         dataSource={this.state.dataSource}
         enableEmptySections={true}
-        renderRow={(rowData) =>
-          <View style={{flex: 3}}>
-            <TouchableOpacity  onPress={()=>{}}>
-            <Image source={{uri: rowData.image.path, isStatic:true}}
-            style={{width: this.width, height: 270, resizeMode: 'cover'}}/>
+        renderRow={(rowData) => //{{console.log(rowData.image.path); return null;}}
+         <View style={{flex: 3}}>
+           <TouchableOpacity  onPress={()=>{}}>
+              <Image source={{uri: rowData.image.path, isStatic:true}}
+              style={{width: this.width, height: 270, resizeMode: 'cover'}}/>
             </TouchableOpacity>
           </View>
         }/>

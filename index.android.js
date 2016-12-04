@@ -85,7 +85,7 @@ export default class CameraMapper extends Component {
         }});
       },
       (error) => console.log(JSON.stringify(error)),
-    {enableHighAccuracy: false, timeout: 10000, maximumAge: 1000}
+    {enableHighAccuracy: false, timeout: 30000, maximumAge: 1000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
       let lastPosition = JSON.stringify(position.coords);
