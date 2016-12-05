@@ -1,53 +1,91 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight,
+  StatusBar,
+  Dimensions,
 } from 'react-native';
+import { styles } from './styles/index';
+import CameraView from './Views/camera';
+import Mapper from './Views/map';
+import Gallery from './Views/gallery';
+
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import BottomTabBar from './Bars/BottomTabBar';
 
 export default class CameraMapper extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      region: {
+        latitude: 59.334591,
+        longitude: 18.063240,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121,
+      },
+    };
+  }
+
+  componentWillMount() {
+    this.getGeoLocation();
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        <StatusBar
+         backgroundColor='black'
+         barStyle="light-content"
+        />
+        <ScrollableTabView
+          tabBarBackgroundColor='black'
+          tabBarPosition='bottom'
+          prerenderingSiblingsNumber={2}
+          contentProps ={{removeClippedSubviews: true}}
+          renderTabBar={() => <BottomTabBar />}>
+          <CameraView
+            tabLabel="camera"
+            region={ this.state.region }
+
+            />
+          <Mapper tabLabel="map"
+          region={ this.state.region }
+          />
+        <Gallery tabLabel="collections"/>
+        </ScrollableTabView>
+    </View>
     );
+
   }
+
+  getGeoLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({region:{
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        }});
+      },
+      (error) => console.log(JSON.stringify(error)),
+    {enableHighAccuracy: false, timeout: 30000, maximumAge: 1000}
+    );
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      let lastPosition = JSON.stringify(position.coords);
+    });
+  }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('CameraMapper', () => CameraMapper);
