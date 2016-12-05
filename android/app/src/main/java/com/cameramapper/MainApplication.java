@@ -4,11 +4,13 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package
+
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 
@@ -39,6 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativePushNotificationPackage(),
             new VectorIconsPackage(),
             new OrientationPackage(),
             new MapsPackage(),
@@ -57,6 +60,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
-    SoLoader.init(this, /* native exopackage */ false);
+  //  SoLoader.init(this, /* native exopackage */ false);
   }
 }

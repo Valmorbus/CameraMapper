@@ -16,6 +16,7 @@ import { styles } from '../styles/index';
 import Camera from 'react-native-camera';
 import Icon from '../Bars/MaterialIcons';
 import Orientation from 'react-native-orientation';
+import PushNotification from 'react-native-push-notification';
 
 export default class CameraView extends Component {
 
@@ -65,6 +66,14 @@ export default class CameraView extends Component {
 
   }
 
+  runPushNotification() {
+    PushNotification.localNotificationSchedule({
+      title: 'Take a new photo',
+      message: 'It\'s been an hour since you last took a photo, take another one', // (required)
+      date: new Date(Date.now() + (60 * 60 * 1000)) // in 60 secs
+    });
+  }
+
 
   render() {
     return (
@@ -109,7 +118,7 @@ export default class CameraView extends Component {
     this.camera.capture()
       .then((data) =>{
         this.saveImageLocation(data);
-
+        this.runPushNotification();
       })
       .catch(err => console.error(err));
   }
