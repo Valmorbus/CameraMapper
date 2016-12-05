@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
 } from 'react-native';
 import { styles } from '../styles/index';
@@ -68,9 +68,10 @@ export default class ImageModal extends Component {
           style={{width: this.props.imageWidth, height: this.props.imageHeight}}
           resizeMode={'cover'}
            />
-          <TouchableHighlight onPress={()=>this.shareImageOnFacebook()}>
-            <Text> Press me FB</Text>
-          </TouchableHighlight>
+          <TouchableOpacity onPress={()=>this.shareImageOnFacebook()}>
+            <Image source={require('../images/facebook_button.png')}
+              style={styles.fbbutton}/>
+          </TouchableOpacity>
        </Modal>
     );
   }
