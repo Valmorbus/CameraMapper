@@ -8,8 +8,8 @@ import {
   Dimensions,
   AsyncStorage,
 } from 'react-native';
-import Modal from 'react-native-simple-modal';
 import { styles } from '../styles/index';
+import ImageModal from './modal';
 
 export default class Gallery extends Component {
 
@@ -60,32 +60,9 @@ export default class Gallery extends Component {
     });
   }
 
-  renderModal() {
-    return (
-      <Modal
-        style={styles.modal}
-        animationType={'slide'}
-        overlayBackground={'rgba(0, 0, 0, 0.75)'}
-        closeOnTouchOutside={true}
-        open={this.state.modalVisible}
-        modalDidClose={() => {this.setState({modalVisible: false});}}
-        containerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        >
-         <Image
-          source={{uri: this.state.modalImage, isStatic:true}}
-          style={{width: this.state.imageWidth/1.5, height: this.state.imageHeight/1.5}}
-          resizeMode={'cover'}
-           />
-          <TouchableOpacity onPress={()=>{}}>
-            <Text> Press me FB</Text>
-          </TouchableOpacity>
-       </Modal>
-    );
+  setModalInvisible() {
+    this.setState({modalVisible: false});
   }
-
 
   render(){
     return (
@@ -110,7 +87,13 @@ export default class Gallery extends Component {
             </TouchableOpacity>
           </View>
         }/>
-      { this.renderModal() }
+      <ImageModal
+      modalVisible={this.state.modalVisible}
+      modalImage={this.state.modalImage}
+      imageWidth={this.state.imageWidth/1.5}
+      imageHeight={this.state.imageHeight/1.5}
+      setModalInvisible={this.setModalInvisible.bind(this)}/>
+
       </View>
     );
   }

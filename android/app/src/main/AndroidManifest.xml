@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
+
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="22" />
@@ -30,6 +30,13 @@
       <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="AIzaSyCEoEOExuhOPN0zlxOA5pEqMNvfVhrOMiQ"/>
+      <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_app_id"/>
+      <provider
+        android:authorities="com.facebook.app.FacebookContentProvider439002899638287"
+        android:name="com.facebook.FacebookContentProvider"
+        android:exported="true" />
     </application>
 
 </manifest>

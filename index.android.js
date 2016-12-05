@@ -56,7 +56,7 @@ export default class CameraMapper extends Component {
         <ScrollableTabView
           tabBarBackgroundColor='black'
           tabBarPosition='bottom'
-          prerenderingSiblingsNumber={1}
+          prerenderingSiblingsNumber={2}
           contentProps ={{removeClippedSubviews: true}}
           renderTabBar={() => <BottomTabBar />}>
           <CameraView
