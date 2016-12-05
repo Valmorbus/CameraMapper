@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { styles } from '../styles/index';
 import Modal from 'react-native-simple-modal';
+import FBSDK from 'react-native-fbsdk';
 
 export default class ImageModal extends Component {
 
@@ -17,6 +18,36 @@ export default class ImageModal extends Component {
   sendCallback() {
     this.props.setModalInvisible();
   }
+
+  shareImageOnFacebook() {
+    const sharePhotoContent = {
+      contentType: 'photo',
+      photos: [{
+        imageUrl: this.props.modalImage,
+        userGenerated: true,
+        caption: 'test',
+      }]
+    };
+    FBSDK.ShareDialog.canShow(sharePhotoContent)
+    .then(
+      function(canShow) {
+        if (canShow) {
+          return FBSDK.ShareDialog.show(sharePhotoContent);
+        }
+      })
+    .then(
+      function(result) {
+        if (result.isCancelled) {
+          alert('Share cancelled');
+        } else {
+          alert('Share success with postId: ' + result.postId);
+        }
+      },
+    function(error) {
+      alert('Share fail with error: ' + error);
+    });
+  }
+
 
   render() {
     return (
@@ -37,7 +68,7 @@ export default class ImageModal extends Component {
           style={{width: this.props.imageWidth, height: this.props.imageHeight}}
           resizeMode={'cover'}
            />
-          <TouchableHighlight onPress={()=>{}}>
+          <TouchableHighlight onPress={()=>this.shareImageOnFacebook()}>
             <Text> Press me FB</Text>
           </TouchableHighlight>
        </Modal>
