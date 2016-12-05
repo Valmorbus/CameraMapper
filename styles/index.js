@@ -56,4 +56,8 @@ export const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#F5F5F5'
   },
+  fbbutton: {
+    alignSelf: 'center',
+    margin: 10,
+  }
 });

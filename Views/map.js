@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { styles } from '../styles/index';
 import MapView from 'react-native-maps';
-import Modal from 'react-native-simple-modal';
+import ImageModal from './modal';
 
 export default class Mapper extends Component {
 
@@ -91,30 +91,8 @@ export default class Mapper extends Component {
     return markerArray;
   }
 
-  renderModal() {
-    return (
-      <Modal
-        style={styles.modal}
-        animationType={'slide'}
-        overlayBackground={'rgba(0, 0, 0, 0.75)'}
-        closeOnTouchOutside={true}
-        open={this.state.modalVisible}
-        modalDidClose={() => {this.setState({modalVisible: false});}}
-        containerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        >
-         <Image
-          source={{uri: this.state.modalImage, isStatic:true}}
-          style={{width: this.state.imageWidth/2, height: this.state.imageHeight/2}}
-          resizeMode={'cover'}
-           />
-          <TouchableHighlight onPress={()=>{}}>
-            <Text> Press me FB</Text>
-          </TouchableHighlight>
-       </Modal>
-    );
+  setModalInvisible() {
+    this.setState({modalVisible: false});
   }
 
   render() {
@@ -131,7 +109,13 @@ export default class Mapper extends Component {
        { this.renderMarkers() }
 
        </MapView>
-       { this.renderModal() }
+       <ImageModal
+         modalVisible={this.state.modalVisible}
+         modalImage={this.state.modalImage}
+         imageWidth={this.state.imageWidth/2}
+         imageHeight={this.state.imageHeight/2}
+         setModalInvisible={this.setModalInvisible.bind(this)}
+        />
       </View>
     );
   }

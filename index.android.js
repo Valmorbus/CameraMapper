@@ -21,7 +21,6 @@ import Gallery from './Views/gallery';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import BottomTabBar from './Bars/BottomTabBar';
 
-
 export default class CameraMapper extends Component {
 
   constructor(props) {
@@ -35,7 +34,6 @@ export default class CameraMapper extends Component {
         longitudeDelta: 0.0121,
       },
     };
-
   }
 
   componentWillMount() {
@@ -56,7 +54,7 @@ export default class CameraMapper extends Component {
         <ScrollableTabView
           tabBarBackgroundColor='black'
           tabBarPosition='bottom'
-          prerenderingSiblingsNumber={1}
+          prerenderingSiblingsNumber={2}
           contentProps ={{removeClippedSubviews: true}}
           renderTabBar={() => <BottomTabBar />}>
           <CameraView

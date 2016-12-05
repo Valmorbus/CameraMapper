@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   ListView,
@@ -9,6 +8,8 @@ import {
   Dimensions,
   AsyncStorage,
 } from 'react-native';
+import { styles } from '../styles/index';
+import ImageModal from './modal';
 
 export default class Gallery extends Component {
 
@@ -19,6 +20,8 @@ export default class Gallery extends Component {
       dataSource: ds.cloneWithRows(['row 1', 'row 2']
       ),
       data:{},
+      modalVisible: false,
+      modalImage: '',
     };
   }
 
@@ -29,9 +32,8 @@ export default class Gallery extends Component {
 
   renderGallery() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(
-        this.state.data
-      )});
+      dataSource: this.state.dataSource.cloneWithRows(this.state.data)
+    });
   }
 
   getImageLocation() {
@@ -40,9 +42,8 @@ export default class Gallery extends Component {
         let items = JSON.parse(response);
         if (items !== null) {
           this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(
-              items
-            )});
+            dataSource: this.state.dataSource.cloneWithRows(items)
+          });
         }
       })
       .catch((error) => {
@@ -50,26 +51,49 @@ export default class Gallery extends Component {
       });
   }
 
-  sortListViewObject(data){
-    return Object.keys(data).sort().reverse();
+  showImageModal(image, width, height) {
+    this.setState({
+      modalImage: image,
+      modalVisible: true,
+      imageWidth: width,
+      imageHeight: height
+    });
   }
 
+  setModalInvisible() {
+    this.setState({modalVisible: false});
+  }
 
   render(){
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, flexDirection: 'row',}}>
         <ListView
         backgroundColor={'black'}
         dataSource={this.state.dataSource}
         enableEmptySections={true}
         renderRow={(rowData) => //{{console.log(rowData.image.path); return null;}}
-         <View style={{flex: 3}}>
-           <TouchableOpacity  onPress={()=>{}}>
+         <View style={{flex: 3, alignItems: 'center', margin: 15,}}>
+           <TouchableOpacity  onPress={() =>
+               this.showImageModal(rowData.image.path, rowData.width, rowData.height)
+             }>
               <Image source={{uri: rowData.image.path, isStatic:true}}
-              style={{width: this.width, height: 270, resizeMode: 'cover'}}/>
+              style={{
+                width: rowData.width/2,
+                height: rowData.height/2,
+                borderWidth: 10,
+                borderColor: 'white',
+                borderRadius: 10
+              }}/>
             </TouchableOpacity>
           </View>
         }/>
+      <ImageModal
+      modalVisible={this.state.modalVisible}
+      modalImage={this.state.modalImage}
+      imageWidth={this.state.imageWidth/1.5}
+      imageHeight={this.state.imageHeight/1.5}
+      setModalInvisible={this.setModalInvisible.bind(this)}/>
+
       </View>
     );
   }
