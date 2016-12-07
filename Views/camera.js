@@ -63,9 +63,10 @@ export default class CameraView extends Component {
 
   runPushNotification() {
     PushNotification.localNotificationSchedule({
+      id: '0', //just call on the last taken photo
       title: 'Take a new photo',
-      message: 'It\'s been an hour since you last took a photo, take another one', // (required)
-      date: new Date(Date.now() + (60 * 60 * 1000)) // in 60 secs
+      message: 'It\'s been an hour since you last took a photo, take another one',
+      date: new Date(Date.now() + (60*60 * 1000)) // in 60 min
     });
   }
 

@@ -31,6 +31,13 @@ export default class Gallery extends Component {
     this.renderGallery();
   }
 
+  componentDidMount() {
+    this.interval = setInterval(() =>{
+      this.getImageLocation();
+    }, 60000);
+  }
+
+
   renderGallery() {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.state.data)
