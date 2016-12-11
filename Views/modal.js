@@ -53,9 +53,13 @@ export default class ImageModal extends Component {
 
   shareOnTwitter() {
     FabricTwitterKit.composeTweet({
-      body: 'react-native-fabric-twitterkit is awesome!'
+      image: this.props.modalImage.toString(),
     }, (completed, cancelled, error) => {
-        console.log('completed: ' + completed + ' cancelled: ' + cancelled + ' error: ' + error);
+      if (error) {
+        alert('Could not tweet');
+      } else if (completed) {
+        alert('Tweet sent');
+      }
     });
   }
 
