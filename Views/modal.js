@@ -83,14 +83,16 @@ export default class ImageModal extends Component {
           style={{width: this.props.imageWidth, height: this.props.imageHeight}}
           resizeMode={'cover'}
            />
-          <TouchableOpacity onPress={()=>this.shareImageOnFacebook()}>
-            <Image source={require('../images/facebook_button.png')}
-              style={styles.fbbutton}/>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={()=>this.shareOnTwitter()}>
-            <Image source={require('../images/facebook_button.png')}
-              style={styles.fbbutton}/>
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity onPress={()=>this.shareImageOnFacebook()}>
+              <Image source={require('../images/facebook_button.png')}
+                style={styles.fbbutton}/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.shareOnTwitter()}>
+              <Image source={require('../images/Twitter_Logo_Blue.png')}
+                style={[styles.fbbutton, {width: 70, height: 45}]}/>
+            </TouchableOpacity>
+          </View>
        </Modal>
     );
   }
