@@ -9,6 +9,8 @@ import {
 import { styles } from '../styles/index';
 import Modal from 'react-native-simple-modal';
 import FBSDK from 'react-native-fbsdk';
+import FabricTwitterKit from 'react-native-fabric-twitterkit';
+
 
 export default class ImageModal extends Component {
 
@@ -49,6 +51,14 @@ export default class ImageModal extends Component {
     });
   }
 
+  shareOnTwitter() {
+    FabricTwitterKit.composeTweet({
+      body: 'react-native-fabric-twitterkit is awesome!'
+    }, (completed, cancelled, error) => {
+        console.log('completed: ' + completed + ' cancelled: ' + cancelled + ' error: ' + error);
+    });
+  }
+
 
   render() {
     return (
@@ -70,6 +80,10 @@ export default class ImageModal extends Component {
           resizeMode={'cover'}
            />
           <TouchableOpacity onPress={()=>this.shareImageOnFacebook()}>
+            <Image source={require('../images/facebook_button.png')}
+              style={styles.fbbutton}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.shareOnTwitter()}>
             <Image source={require('../images/facebook_button.png')}
               style={styles.fbbutton}/>
           </TouchableOpacity>

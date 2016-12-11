@@ -14,6 +14,13 @@ import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 
+import com.smixx.fabric.FabricPackage;
+import io.fabric.sdk.android.Fabric;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+import com.tkporter.fabrictwitterkit.FabricTwitterKitPackage;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -41,11 +48,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            FabricTwitterKitPackage.getInstance(),
             new ReactNativePushNotificationPackage(),
             new VectorIconsPackage(),
             new OrientationPackage(),
             new MapsPackage(),
             new RCTCameraPackage(),
+            new FabricPackage(),
             new FBSDKPackage(mCallbackManager)
       );
     }
@@ -60,6 +69,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
-  //  SoLoader.init(this, /* native exopackage */ false);
+    SoLoader.init(this, /* native exopackage */ false);
   }
 }

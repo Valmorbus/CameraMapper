@@ -71,6 +71,10 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ff0402b48da5aa2f090bdac26e3d8296d8164ab1"
+        />
     </application>
 
 </manifest>

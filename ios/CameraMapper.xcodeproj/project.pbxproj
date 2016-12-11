@@ -36,6 +36,7 @@
 		8115761C6AAE44DBB4735163 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C40F9475C3F1415B863CF5D3 /* Zocial.ttf */; };
 		BFB0739012DF472681110242 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C50EDF7C2EE943AB8582B14B /* libRCTFBSDK.a */; };
 		58AB9006D5CF40158B8BDC81 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3C661446504298864C010D /* libRCTOrientation.a */; };
+		557126C1B14C46828DF2CE33 /* libFabricTwitterKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D50849E9BC97422E98032716 /* libFabricTwitterKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,8 @@
 		C50EDF7C2EE943AB8582B14B /* libRCTFBSDK.a */ = {isa = PBXFileReference; name = "libRCTFBSDK.a"; path = "libRCTFBSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		884C0426B3E94983940D663E /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; name = "RCTOrientation.xcodeproj"; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		3B3C661446504298864C010D /* libRCTOrientation.a */ = {isa = PBXFileReference; name = "libRCTOrientation.a"; path = "libRCTOrientation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		60D652E98F504A8DB0465A23 /* FabricTwitterKit.xcodeproj */ = {isa = PBXFileReference; name = "FabricTwitterKit.xcodeproj"; path = "../node_modules/react-native-fabric-twitterkit/FabricTwitterKit.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		D50849E9BC97422E98032716 /* libFabricTwitterKit.a */ = {isa = PBXFileReference; name = "libFabricTwitterKit.a"; path = "libFabricTwitterKit.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +192,7 @@
 				70B122957C924B30B0F96BA5 /* libRNVectorIcons.a in Frameworks */,
 				BFB0739012DF472681110242 /* libRCTFBSDK.a in Frameworks */,
 				58AB9006D5CF40158B8BDC81 /* libRCTOrientation.a in Frameworks */,
+				557126C1B14C46828DF2CE33 /* libFabricTwitterKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +320,7 @@
 				FF38CD03911D4EC49083F394 /* RNVectorIcons.xcodeproj */,
 				51E828049C9A4C239AD432F4 /* RCTFBSDK.xcodeproj */,
 				884C0426B3E94983940D663E /* RCTOrientation.xcodeproj */,
+				60D652E98F504A8DB0465A23 /* FabricTwitterKit.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -675,6 +681,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CameraMapper.app/CameraMapper";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -696,6 +703,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
+					"$(SRCROOT)\..\node_modules\react-native-fabric-twitterkit\FabricTwitterKit",
 				);
 				INFOPLIST_FILE = "CameraMapper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -723,6 +731,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
+					"$(SRCROOT)\..\node_modules\react-native-fabric-twitterkit\FabricTwitterKit",
 				);
 				INFOPLIST_FILE = "CameraMapper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -779,6 +788,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
+					"$(SRCROOT)\..\node_modules\react-native-fabric-twitterkit\FabricTwitterKit",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -824,6 +834,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
+					"$(SRCROOT)\..\node_modules\react-native-fabric-twitterkit\FabricTwitterKit",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

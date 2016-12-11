@@ -13,6 +13,7 @@
     "react": "15.4.1",
     "react-native": "0.38.0",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-fabric": "^0.3.2",
     "react-native-fabric-twitterkit": "0.0.1",
     "react-native-fbsdk": "^0.4.0",
     "react-native-maps": "^0.11.0",
@@ -20,7 +21,6 @@
     "react-native-push-notification": "2.1.1",
     "react-native-scrollable-tab-view": "^0.7.0",
     "react-native-simple-modal": "^4.0.1",
-    "react-native-twitter-share": "0.0.3",
     "react-native-vector-icons": "^3.0.0"
   },
   "jest": {
